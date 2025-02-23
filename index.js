@@ -5,11 +5,11 @@ var cors = require('cors');
 connectToMongo();
 var app = express();
 
-// Enable CORS for localhost:3000
+// Enable CORS for both production and localhost
 const corsOptions = {
-    origin: "https://presence-pro-front-end2.vercel.app",  // Allow requests from this domain
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allow specific methods
-    credentials: true,  // If you need to send cookies or authentication headers
+    origin: ["https://presence-pro-front-end2.vercel.app", "http://localhost:3000"],  // Allow requests from these domains
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allowed methods
+    credentials: true,  // Allow credentials (cookies, auth headers)
 };
 
 app.use(cors(corsOptions));  // Apply CORS middleware with options
