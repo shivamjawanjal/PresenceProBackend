@@ -115,7 +115,7 @@ router.post(
             activeAttendanceCodes[attendacneCode] = true;
             setTimeout(() => {
                 delete activeAttendanceCodes[attendacneCode];
-            }, 120000); // 2 minutes in milliseconds
+            }, 12000000); // 2 minutes in milliseconds
 
             res.json(saveAttendance);
         } catch (error) {
