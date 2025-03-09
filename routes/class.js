@@ -94,11 +94,14 @@ router.post(
                 return res.status(404).json({ error: "Class not found" });
             }
 
-            if (classToJoin.students.includes(req.user.id)) {
+            // Check if user is already in the class
+            const isAlreadyJoined = classToJoin.students.some(student => student._id.toString() === req.user.id);
+            if (isAlreadyJoined) {
                 return res.status(400).json({ error: "You have already joined this class" });
             }
 
-            classToJoin.students.push(req.user.id);
+            // Push user ID and name into students array
+            classToJoin.students.push({ _id: req.user.id, name: req.user.name });
             await classToJoin.save();
 
             res.json({ message: "You have joined the class", className: classToJoin.className });
@@ -108,6 +111,7 @@ router.post(
         }
     }
 );
+
 
 // ROUTE 6: Get all joined classes using: GET "/api/class/joinedclasses". Login required
 router.get('/joinedclasses', fetchuser, async (req, res) => {
