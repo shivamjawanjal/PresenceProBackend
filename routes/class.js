@@ -94,20 +94,14 @@ router.post(
                 return res.status(404).json({ error: "Class not found" });
             }
 
-            // Fetch the user details using req.user.id
-            const user = await User.findById(req.user.id).select("username");
-            if (!user) {
-                return res.status(404).json({ error: "User not found" });
-            }
-
-            // Check if user already joined
-            const alreadyJoined = classToJoin.students.some(student => student._id.toString() === req.user.id);
-            if (alreadyJoined) {
+            // Check if user is already in the class
+            const isAlreadyJoined = classToJoin.students.some(student => student._id.toString() === req.user.id);
+            if (isAlreadyJoined) {
                 return res.status(400).json({ error: "You have already joined this class" });
             }
 
-            // Add student with both ID and username
-            classToJoin.students.push({ _id: req.user.id, name: user.username });
+            // Push user ID and name into students array
+            classToJoin.students.push({ _id: req.user.id, name: req.user.name });
             await classToJoin.save();
 
             res.json({ message: "You have joined the class", className: classToJoin.className });
@@ -117,6 +111,7 @@ router.post(
         }
     }
 );
+
 
 
 
