@@ -25,8 +25,14 @@ const ClassSchema = mongoose.Schema({
     },
     students: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+            },
+            name: {
+                type: String,
+                required: true,
+            },
         },
     ],
     date: {
