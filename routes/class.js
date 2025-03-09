@@ -101,7 +101,7 @@ router.post(
             }
 
             // Push user ID and name into students array
-            classToJoin.students.push({ _id: req.user.id, name: req.user.name });
+            classToJoin.students.push({ _id: req.user.id, name: req.user.username });
             await classToJoin.save();
 
             res.json({ message: "You have joined the class", className: classToJoin.className });
