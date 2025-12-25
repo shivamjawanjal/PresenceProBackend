@@ -7,7 +7,7 @@ var app = express();
 
 // Enable CORS for both production and localhost
 const corsOptions = {
-    origin: ["https://presencepro.vercel.app/", "http://localhost:3000"],  // Allow requests from these domains
+    origin: ["https://presencepro.vercel.app", "http://localhost:3000"],  // Allow requests from these domains
     methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allowed methods
     credentials: true,  // Allow credentials (cookies, auth headers)
 };
@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
+
 
 
 
